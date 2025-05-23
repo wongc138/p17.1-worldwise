@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./CityItem.module.css";
 import PropTypes from "prop-types";
 
@@ -9,16 +10,18 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function CityItem({ city }) {
-  const { cityName, emoji, date } = city;
+  const { cityName, emoji, date, id } = city;
 
   return (
-    <li className={styles.cityItem}>
-      <span className={styles.emoji}>{emoji}</span>
-      <h3 className={styles.name}>{cityName}</h3>
-      <time className={styles.date}>({formatDate(date)}) </time>
-      <button className={styles.deleteBtn} type="button">
-        &times;
-      </button>
+    <li>
+      <Link className={styles.cityItem} to={`${id}`}>
+        <span className={styles.emoji}>{emoji}</span>
+        <h3 className={styles.name}>{cityName}</h3>
+        <time className={styles.date}>({formatDate(date)}) </time>
+        <button className={styles.deleteBtn} type="button">
+          &times;
+        </button>
+      </Link>
     </li>
   );
 }
@@ -27,6 +30,7 @@ CityItem.propTypes = {
     cityName: PropTypes.string.isRequired,
     emoji: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
 };
 
